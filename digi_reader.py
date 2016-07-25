@@ -20,12 +20,13 @@ if __name__ == "__main__":
 		barcodeScan(line)
 
 
+#Takes in String of Barcode and returns Data
 def barcodeScan(line):
 
 	sys.stderr.write('\n\n-------------------------------------\n')
 
-	d = None
-	# parse barcode 1786439000000040970571
+	data = None
+
 	sys.stderr.write('info: code read: {}\n'.format(line))
 
 	if len(line) >= 22: # digikey bag code
@@ -46,13 +47,9 @@ def barcodeScan(line):
 			prod_id = "".join(newList)
 			sys.stderr.write('info: String front popped: {}\n'.format(prod_id))
 
-		d = barcode2data(prod_id)
-	elif '-ND' in line: # digikey part/number
-		d = digikey2data(line.strip())
-	elif '-' in line:	# mouser code
-		d = mouser2data(line.strip())
+		data = barcode2data(prod_id)
 	else:
 		sys.stderr.write('info: cannot parse code, no valid format : {}\n'.format(line))
 
-	if d is not None:
-		print "%s, %s, %s, %s" % (d['provider'], d['provider_pn'], d['manufacturer_pn'], d['description'])
+	if data is not None:
+		print "%s, %s, %s, %s" % (data['provider'], data['provider_pn'], data['manufacturer_pn'], data['description'])
