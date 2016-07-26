@@ -44,3 +44,4 @@ def barcodeScan(line):
 
 	if data is not None:
 		print "%s, %s, %s, %s" % (data['provider'], data['provider_pn'], data['manufacturer_pn'], data['description'])
+		return data
