@@ -1,5 +1,7 @@
-#     t k P h o n e . p y
-#
+#Justin Hynes-Bruell  8/2/16
+#Resource:
+#http://www.openbookproject.net/py4fun/gui/tkPhone.html
+
 from Tkinter import *
 from phones  import *
 
@@ -115,4 +117,3 @@ def setSelect () :
 win = makeWindow()
 setSelect ()
 win.mainloop()
-

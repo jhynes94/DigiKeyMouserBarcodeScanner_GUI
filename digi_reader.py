@@ -39,6 +39,10 @@ def barcodeScan(line):
 			sys.stderr.write('info: String front popped: {}\n'.format(prod_id))
 
 		data = barcode2data(prod_id)
+	elif '-ND' in line: # digikey part/number
+			data = partNumber2Data(line.strip())
+	elif '-' in line:	# mouser code
+			d = mouser2data(line.strip())
 	else:
 		sys.stderr.write('info: cannot parse code, no valid format : {}\n'.format(line))
 
