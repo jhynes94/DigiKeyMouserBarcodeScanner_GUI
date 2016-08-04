@@ -13,8 +13,8 @@ To run:
 * pip install beautifulsoup4
 * pip install tkinter
 
-Run program DigiGUI by going to the correct directory and in Python CMD run:
-python DigiGUI.py
+Run program the GUI by going to the correct directory and double-clicking on "GUI.py" or in Python CMD run:
+python GUI.py
 
 Later Directions will be posted
 
@@ -29,7 +29,7 @@ I hope this serves you well. This is my first real code release to the public so
 Tests
 ---------------------------------
 
-Describe and show how to run the tests with code examples.
+There are no tests currently Written.
 
 Contributors
 ---------------------------------
