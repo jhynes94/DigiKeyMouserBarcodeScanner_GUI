@@ -21,7 +21,7 @@ Later Directions will be posted
 Motivation
 ----------------------------
 
-At worked I've been asked to catalog somewhere along the lines of 10,000 DigiKey bags in an effort to save costs on ordering parts we already have.
+At worked I've been asked to catalog somewhere along the lines of 10,000 DigiKey bags in an effort to save costs. With this system, we can avoid re-ordering parts we have in stock.
 
 I hope this serves you well. This is my first real code release to the public so if you like it, I'd love to hear. If you have any questions Please feel free to reach me at jbruell94@gmail.com
 
