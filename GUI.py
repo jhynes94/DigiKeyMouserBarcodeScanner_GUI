@@ -4,6 +4,7 @@
 
 from Tkinter import *
 from phones  import *
+from catalogModel  import *
 
 from digi_reader import *
 
@@ -44,11 +45,23 @@ def loadEntry  () :
     manPartNum.set(manPartNum1)
     description.set(description1)
 
+def catalogLoad ():
+    catalog.loadCSV(csvFileName.get())
+
 def makeWindow () :
-    global newBarcode, barcode, provider, partNum, manPartNum, description
+
+    #data Model
+    global catalog
+    catalog = Catalog()
+
+    #Fields for input
+    global newBarcode, barcode, provider, partNum, manPartNum, description, csvFileName
+    
+    #selection for editing
     global select
     win = Tk()
 
+    #Search Frame for GUI
     searchFrane = Frame(win)
     searchFrane.pack()
     newBarcode = StringVar()
@@ -90,7 +103,8 @@ def makeWindow () :
     phone.grid(row=4, column=1, sticky=W)
 
 
-    frame2 = Frame(win)       # Row of buttons
+    # Row of buttons
+    frame2 = Frame(win)
     frame2.pack()
     b1 = Button(frame2,text=" Add  ",command=addEntry)
     b2 = Button(frame2,text="Update",command=updateEntry)
@@ -99,13 +113,24 @@ def makeWindow () :
     b1.pack(side=LEFT); b2.pack(side=LEFT)
     b3.pack(side=LEFT); b4.pack(side=LEFT)
 
-    frame3 = Frame(win)       # select of names
+    # select of names
+    frame3 = Frame(win)       
     frame3.pack()
     scroll = Scrollbar(frame3, orient=VERTICAL)
     select = Listbox(frame3, yscrollcommand=scroll.set, height=6)
     scroll.config (command=select.yview)
     scroll.pack(side=RIGHT, fill=Y)
     select.pack(side=LEFT,  fill=BOTH, expand=1)
+
+
+    csvFrane = Frame(win)
+    csvFrane.pack()
+    csvFileName = StringVar()
+    name = Entry(csvFrane, textvariable=csvFileName)
+    #name.entryVariable.set(u"Enter Barcode")
+    name.grid(row=0, column=0, sticky=W)
+    searchButton = Button(csvFrane,text=" Load  ",command=catalogLoad)
+    searchButton.grid(column=1,row=0)
     return win
 
 def setSelect () :
