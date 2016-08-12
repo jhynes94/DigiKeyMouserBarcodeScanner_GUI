@@ -6,6 +6,8 @@ from Tkinter import *
 from phones  import *
 from catalogModel  import *
 
+from csv import *
+
 from digi_reader import *
 
 
@@ -13,11 +15,19 @@ def OnPressEnter():
     print("Submission")
 
 def SearchForPart ():
-    code = newBarcode.get()
+    code = newBarcode.get().strip()
+    barcode.set(code)
     data = barcodeScan(code)
 
     #Append to phoneList
     phonelist.append ([code, data['provider'], data['provider_pn'], data['manufacturer_pn'], data['description']])
+    
+    barcode.set(code)
+    provider.set(data['provider'])
+    partNum.set(data['provider_pn'])
+    manPartNum.set(data['manufacturer_pn'])
+    description.set(data['description'])
+
     setSelect ()
 
 
@@ -37,6 +47,17 @@ def deleteEntry() :
     del phonelist[whichSelected()]
     setSelect ()
 
+def hello() :
+    import csv
+
+    with open('catalog.csv', 'w') as csvfile:
+        spamwriter = csv.writer(csvfile, delimiter=' ', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+        #spamwriter.writerow(['Spam'] * 5 + ['Baked Beans'])
+        #spamwriter.writerow(['Spam', 'Lovely Spam', 'Wonderful Spam'])
+        write = barcode.get() + ", " + provider.get() + ", " + partNum.get() + ", " + manPartNum.get() + ", "+ description.get()
+        print write
+        spamwriter.writerow(write)
+
 def loadEntry  () :
     barcode1, provider1, partNum1, manPartNum1, description1 = phonelist[whichSelected()]
     barcode.set(barcode1)
@@ -49,11 +70,6 @@ def catalogLoad ():
     catalog.loadCSV(csvFileName.get())
 
 def makeWindow () :
-
-    #data Model
-    global catalog
-    catalog = Catalog()
-
     #Fields for input
     global newBarcode, barcode, provider, partNum, manPartNum, description, csvFileName
     
@@ -102,6 +118,13 @@ def makeWindow () :
     phone= Entry(frame1, textvariable=description)
     phone.grid(row=4, column=1, sticky=W)
 
+    #Save Button
+    SaveFrame = Frame(win)
+    SaveFrame.pack()
+    searchButton = Button(SaveFrame,text=" Save to CSV  ",command=hello)
+    #searchButton.grid(column=1,row=0)
+    searchButton.pack(side=TOP)
+
 
     # Row of buttons
     frame2 = Frame(win)
@@ -129,7 +152,7 @@ def makeWindow () :
     name = Entry(csvFrane, textvariable=csvFileName)
     #name.entryVariable.set(u"Enter Barcode")
     name.grid(row=0, column=0, sticky=W)
-    searchButton = Button(csvFrane,text=" Load  ",command=catalogLoad)
+    searchButton = Button(csvFrane,text=" Load to CSV  ",command=catalogLoad)
     searchButton.grid(column=1,row=0)
     return win
 

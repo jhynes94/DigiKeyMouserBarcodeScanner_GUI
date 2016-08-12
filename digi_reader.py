@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+#To Run:
+# type input_file.txt | python digi_reader.py >> output.csv
+
 import sys
 
 from provider.digikey import *
@@ -39,14 +42,14 @@ if __name__ == "__main__":
 
 			d = barcode2data(prod_id)
 		elif '-ND' in line: # digikey part/number
-			d = digikey2data(line.strip())
+			d = partNumber2Data(line.strip())
 		elif '-' in line:	# mouser code
 			d = mouser2data(line.strip())
 		else:
 			sys.stderr.write('info: cannot parse code, no valid format : {}\n'.format(line))
 
 		if d is not None:
-			print "%s, %s, %s, %s" % (d['provider'], d['provider_pn'], d['manufacturer_pn'], d['description'])
+			print "%s, %s, %s, %s, %s" % (d['provider'], line.replace("\n", ""), d['provider_pn'], d['manufacturer_pn'], d['description'])
 
 
 
@@ -86,5 +89,5 @@ def barcodeScan(line):
 		sys.stderr.write('info: cannot parse code, no valid format : {}\n'.format(line))
 
 	if data is not None:
-		print "%s, %s, %s, %s" % (data['provider'], data['provider_pn'], data['manufacturer_pn'], data['description'])
+		print "%s, %s, %s, %s" % (d['provider'], d['provider_pn'], d['manufacturer_pn'], d['description'])
 		return data

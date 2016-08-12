@@ -1,6 +1,5 @@
 import csv
 import sys
-from part  import *
 
 class Catalog:
    'Catalog of items'
