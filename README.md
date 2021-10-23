@@ -21,7 +21,7 @@ Motivation
 
 At work I've been asked to catalog somewhere along the lines of 10,000 DigiKey bags in an effort to save money by buying parts we already have. With this system, we can avoid re-ordering parts we have in stock.
 
-I hope this serves you well. This is my first real code release to the public so if you like it, I'd love to hear. If you have any questions Please feel free to reach me at jbruell94@gmail.com
+I hope this serves you well. This is my first real code release to the public so if you like it, I'd love to hear.
 
 Please also note that as DigiKey updates the HTML, specifically the ID tags of their website, this program will need updateing.
 
